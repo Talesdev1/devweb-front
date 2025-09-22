@@ -1,9 +1,9 @@
 <script>
-  let { type, id, placeholder, label, value = $bindable() } = $props()
+  let { type, id, placeholder, label } = $props()
 </script>
 
 <label for={id}>{label}</label>
-<input type={type} id={id} placeholder={placeholder} autocomplete="off" bind:value={value}>
+<input type={type} name={id} placeholder={placeholder} autocomplete="off" >
 
 
 <style>

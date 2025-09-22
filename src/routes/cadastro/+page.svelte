@@ -2,19 +2,18 @@
   import Title from '$lib/Title.svelte';
   import Field from '$lib/Field.svelte';
   import ButtonComponent from '$lib/Button.svelte';
-  let username = "";
-  let email = "";
-  let password = "";
 </script>
 
 
 <main>
   <Title content={"Cadastro"}></Title>
-  <Field type="text" id="name" placeholder="n0mePubl1c0" label="Nome de usuário" bind:value={username}></Field>
-  <Field type="email" id="email" placeholder="Digite seu email" label="Seu Email" bind:value={email}></Field>
-  <Field type="password" id="password" placeholder="Digite sua senha" label="Senha" bind:value={password}></Field>
-  <ButtonComponent content="Criar cadastro"></ButtonComponent>
-  
+  <form method="post">
+    <Field type="text" id="username" placeholder="n0mePubl1c0" label="Nome de usuário" ></Field>
+    <Field type="email" id="email" placeholder="Digite seu email" label="Seu Email"></Field>
+    <Field type="password" id="password" placeholder="Digite sua senha" label="Senha"></Field>
+    <Field type="password" id="confirmPassword" placeholder="Confirme sua senha" label="Confirmar senha"></Field>
+    <ButtonComponent type="confirm" content="Criar cadastro"></ButtonComponent>  
+  </form>
 </main>
 
 <style>
