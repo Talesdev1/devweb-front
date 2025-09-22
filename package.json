@@ -17,6 +17,7 @@
     "vite": "^7.0.4"
   },
   "dependencies": {
-    "@ark-ui/svelte": "^5.7.0"
+    "@ark-ui/svelte": "^5.7.0",
+    "carta-md": "^4.11.1"
   }
 }
