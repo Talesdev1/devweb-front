@@ -2,7 +2,7 @@ import { API_HOST_URL } from "$env/static/private";
 
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
-  default: async ({ request }) => {
+  default: async ({ cookies, request }) => {
     const data = await request.formData();
     const username = data.get("username");
     const email = data.get("email");
@@ -21,9 +21,12 @@ export const actions = {
         confirm_password: confirm_password,
       }),
     });
-
-    const responseBody = await response.json();
-    console.log(responseBody);
+    if (response.ok) {
+      const responseBody = await response.json();
+      console.log(responseBody);
+      cookies.set("token", responseBody.token, { path: "/" });
+      redirect(303, "/posts");
+    }
     return { sucess: true };
   },
 };

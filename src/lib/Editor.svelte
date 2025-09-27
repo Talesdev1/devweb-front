@@ -5,7 +5,7 @@
 
   });
 
-  let conteudo = $state('');
+  let {conteudo = $bindable()} = $props();
 </script>
 
 <div class="editor-container">

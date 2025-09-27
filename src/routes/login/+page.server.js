@@ -1,8 +1,9 @@
 import { API_HOST_URL } from "$env/static/private";
+import { redirect } from "@sveltejs/kit";
 
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
-  default: async ({ request }) => {
+  default: async ({ cookies, request }) => {
     const data = await request.formData();
     const email = data.get("email");
     const password = data.get("password");
@@ -17,9 +18,12 @@ export const actions = {
         password,
       }),
     });
-
-    const responseBody = await response.json();
-    console.log(responseBody);
+    if (response.ok) {
+      const responseBody = await response.json();
+      cookies.set("token", responseBody.token, { path: "/" });
+      console.log(responseBody);
+      redirect(303, "/posts");
+    }
     return { sucess: true };
   },
 };

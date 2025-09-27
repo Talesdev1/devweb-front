@@ -1,8 +1,8 @@
 <script>
-  let { type, content } = $props()
+  let { type, content, onclick } = $props()
 </script>
 
-<button class={type === 'confirm' ? "confirm" : "cancel"}>{content}</button>
+<button class={type === 'confirm' ? "confirm" : "cancel"} onclick={onclick}>{content}</button>
 
 
 <style>

@@ -1,11 +1,27 @@
 <script>
-    let { title, url, summary, created_at, updated_at, tags } = $props()
+  import { Carta } from "carta-md";
+  let { title, id, body, created_at, updated_at } = $props()
+  let tags = ['livros', 'leitura'];
+  function getDateString(date = new Date()) {
+    let year = date.getFullYear();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let formatedMonth = month < 10 ? `0${month}` : month;
+    let formatedDay = day < 10 ? `0${day}` : day;
+  return `${year}-${formatedMonth}-${formatedDay}`;
+  }
+
+  const carta = new Carta({});
+  let contentHtml = carta.render(body);
 </script>
 
 <article>
-    <h1><a href={url}>{title}</a></h1>
-    <p>{summary}</p>
-    <p class="info">{created_at} [{updated_at}]</p>
+  {#await contentHtml}
+		pending
+	{:then value}
+		<h1><a href={`/posts/${id}`}>{title}</a></h1>
+    {@html value.slice(0,300)} ...
+    <p class="info">{getDateString(new Date(created_at))} [{getDateString(new Date(updated_at))}]</p>
     {#if tags.length > 0}
     <ul class="info">
       {#each tags as tag}
@@ -13,6 +29,7 @@
       {/each}
     </ul>
     {/if}
+	{/await}
 </article>
 
 <style>
